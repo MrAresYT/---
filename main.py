@@ -1,13 +1,17 @@
 import sys
+from random import randint
 
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from random import randint
 
 
 def get_random_size():
     size = randint(50, 300)
     return randint(0, 500), randint(0, 500), size, size
+
+
+def get_random_color():
+    return randint(0, 255), randint(0, 255), randint(0, 255)
 
 
 class Example(QWidget):
@@ -17,7 +21,7 @@ class Example(QWidget):
 
     def initUI(self):
         self.setGeometry(300, 300, 200, 200)
-        self.setWindowTitle('Жёлтые окружности')
+        self.setWindowTitle('Cлучайные окружности')
         self.setFixedSize(600, 600)
         self.btn = QPushButton('Рисовать', self)
         self.btn.setFixedSize(100, 50)
@@ -38,7 +42,7 @@ class Example(QWidget):
         self.do_paint = False
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(*get_random_color()))
         # Рисуем прямоугольник заданной кистью
         qp.drawEllipse(*get_random_size())
 
